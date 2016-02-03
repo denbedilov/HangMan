@@ -64,7 +64,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="New Text"
-                    android:id="@+id/GuessedWordField" />
+                    android:id="@+id/GuessedWordField"
+                    android:singleLine="true"
+                    android:textSize="@dimen/abc_guessed_word_size" />
             </LinearLayout>
 
             <LinearLayout

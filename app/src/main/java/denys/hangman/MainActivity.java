@@ -12,16 +12,15 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView word;
+    private String word;
+    private TextView wordField;
     private ProgressDialog dialog;
     private final String url = "http://api.wordnik.com/v4/words.json/randomWords?hasDictionaryDef=true&minCorpusCount=0&minLength=5&maxLength=10&limit=1&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5";
 
@@ -30,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        word = (TextView) findViewById(R.id.GuessedWordField);
+        wordField = (TextView) findViewById(R.id.GuessedWordField);
 
         //setting up progress dialog
         dialog=new ProgressDialog(this);
@@ -51,7 +50,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         try{
-                            word.setText(Html.fromHtml((String) response.getJSONObject(0).getString("word")).toString());
+                            word = (Html.fromHtml((String) response.getJSONObject(0).getString("word")).toString());
+                            gameInit();
                             dialog.cancel();
                         } catch (JSONException e) {
                             Log.v("JSONException: ", e.getMessage());
@@ -69,5 +69,18 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
         queue.add(request);
+    }
+
+    private void gameInit()
+    {
+        fillGuessWord(word.length());
+    }
+
+    private void fillGuessWord(int wordSize)
+    {
+        String guessedWord = "";
+        for(int i=0; i<wordSize; i++)
+            guessedWord += "◻";
+        wordField.setText(guessedWord);
     }
 }
