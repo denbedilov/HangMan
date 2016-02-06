@@ -103,6 +103,8 @@ public class GameView extends View   {
     public void increaseI()
     {
         i++;
+        invalidate();
+
     }
     public int getI()
     {
