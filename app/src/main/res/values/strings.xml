@@ -1,4 +1,29 @@
 <resources>
     <string name="app_name">Hangman</string>
     <string name="L_letter">L</string>
+    <string name="Q">Q</string>
+    <string name="W">W</string>
+    <string name="E">E</string>
+    <string name="R">R</string>
+    <string name="T">T</string>
+    <string name="Y">Y</string>
+    <string name="U">U</string>
+    <string name="I">I</string>
+    <string name="O">O</string>
+    <string name="P">P</string>
+    <string name="A">A</string>
+    <string name="S">S</string>
+    <string name="D">D</string>
+    <string name="F">F</string>
+    <string name="G">G</string>
+    <string name="H">H</string>
+    <string name="J">J</string>
+    <string name="K">K</string>
+    <string name="Z">Z</string>
+    <string name="X">X</string>
+    <string name="C">C</string>
+    <string name="V">V</string>
+    <string name="B">B</string>
+    <string name="N">N</string>
+    <string name="M">M</string>
 </resources>

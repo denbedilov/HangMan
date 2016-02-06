@@ -10,7 +10,7 @@ import android.view.View;
 /**
  * Created by Denys on 03-Feb-16.
  */
-public class GameView extends View {
+public class GameView extends View   {
 
     private Paint polePaint;
     private Paint manPaint;
@@ -103,5 +103,9 @@ public class GameView extends View {
     public void increaseI()
     {
         i++;
+    }
+    public int getI()
+    {
+        return i;
     }
 }

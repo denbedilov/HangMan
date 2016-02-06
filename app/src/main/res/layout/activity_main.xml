@@ -87,72 +87,82 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Q"
+                        android:text="@string/Q"
                         android:id="@+id/button"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:onClick="onClick" />
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="W"
+                        android:text="@string/W"
                         android:id="@+id/button2"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:onClick="onClick" />
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="E"
+                        android:text="@string/E"
                         android:id="@+id/button3"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:onClick="onClick" />
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="R"
+                        android:text="@string/R"
                         android:id="@+id/button4"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:onClick="onClick" />
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="T"
+                        android:text="@string/T"
                         android:id="@+id/button5"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:onClick="onClick" />
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Y"
+                        android:text="@string/Y"
                         android:id="@+id/button6"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:onClick="onClick" />
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="U"
+                        android:text="@string/U"
                         android:id="@+id/button7"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:onClick="onClick" />
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="I"
+                        android:text="@string/I"
                         android:id="@+id/button8"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:onClick="onClick" />
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="O"
+                        android:text="@string/O"
                         android:id="@+id/button9"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:onClick="onClick" />
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="P"
+                        android:text="@string/P"
                         android:id="@+id/button10"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:onClick="onClick" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -166,65 +176,74 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="A"
+                        android:text="@string/A"
                         android:id="@+id/button11"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:onClick="onClick" />
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="S"
+                        android:text="@string/S"
                         android:id="@+id/button12"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:onClick="onClick" />
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="D"
+                        android:text="@string/D"
                         android:id="@+id/button13"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:onClick="onClick" />
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="F"
+                        android:text="@string/F"
                         android:id="@+id/button14"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:onClick="onClick" />
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="G"
+                        android:text="@string/G"
                         android:id="@+id/button15"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:onClick="onClick" />
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="H"
+                        android:text="@string/H"
                         android:id="@+id/button16"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:onClick="onClick" />
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="J"
+                        android:text="@string/J"
                         android:id="@+id/button17"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:onClick="onClick" />
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="K"
+                        android:text="@string/K"
                         android:id="@+id/button18"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:onClick="onClick" />
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/L_letter"
                         android:id="@+id/button19"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:onClick="onClick" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -238,51 +257,58 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Z"
+                        android:text="@string/Z"
                         android:id="@+id/button20"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:onClick="onClick" />
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="X"
+                        android:text="@string/X"
                         android:id="@+id/button21"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:onClick="onClick" />
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="C"
+                        android:text="@string/C"
                         android:id="@+id/button22"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:onClick="onClick" />
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="V"
+                        android:text="@string/V"
                         android:id="@+id/button23"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:onClick="onClick" />
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="B"
+                        android:text="@string/B"
                         android:id="@+id/button24"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:onClick="onClick" />
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="N"
+                        android:text="@string/N"
                         android:id="@+id/button25"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:onClick="onClick" />
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="M"
+                        android:text="@string/M"
                         android:id="@+id/button26"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:onClick="onClick" />
 
                 </LinearLayout>
             </LinearLayout>
