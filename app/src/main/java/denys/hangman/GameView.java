@@ -110,4 +110,9 @@ public class GameView extends View   {
     {
         return i;
     }
+    public void initI()
+    {
+        i=0;
+        invalidate();
+    }
 }
