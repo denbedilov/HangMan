@@ -63,8 +63,13 @@ public class DAL {
         String[] args = {length + ""};
         Cursor cursor = db.rawQuery("SELECT SCORE FROM " + GameContract.ScoresContract.TABLE_NAME +
                 " WHERE " + GameContract.ScoresContract.LENGTH + "=?", args);
-        int lengthIndex = cursor.getColumnIndex(GameContract.ScoresContract.SCORE);
-        return cursor.getString(lengthIndex);
+      //  int lengthIndex = cursor.getColumnIndex(GameContract.ScoresContract.SCORE);
+        if(cursor == null)
+            return "";
+        cursor.moveToFirst();
+        String w = cursor.getString(0);
+        return w;
+       // return cursor.getString(lengthIndex);
     }
 
     public void updateTime(String length, String time)

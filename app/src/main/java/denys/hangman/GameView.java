@@ -36,7 +36,7 @@ public class GameView extends View   {
         i=0;
 
         polePaint = new Paint();
-        polePaint.setColor(Color.RED);
+        polePaint.setColor(Color.GREEN);
         polePaint.setStrokeWidth(10);
 
         manPaint = new Paint();
@@ -99,7 +99,7 @@ public class GameView extends View   {
 
 
     }
-
+    //increasing number of wrong guesses for next draw
     public void increaseI()
     {
         i++;
@@ -110,6 +110,8 @@ public class GameView extends View   {
     {
         return i;
     }
+
+    //init for new draw
     public void initI()
     {
         i=0;
