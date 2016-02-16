@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                    getWords();
                 if(position != 0)
                 {
+                    length = lengthSpinner.getSelectedItem().toString();
                     time.setText(INITSCORE);
                     bestScore.setText(dal.getTime(Integer.valueOf((String) ((TextView) view).getText())));
 
@@ -146,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //game initialization- filling lenghts spinner, crating timer tast,initiating gameview counter for drawing, enabling keyboard
     private void gameInit()
     {
-        length = lengthSpinner.getSelectedItem().toString();
+        //length = lengthSpinner.getSelectedItem().toString();
         fillSpinner();
         inGame = true;
         task=new Task();
