@@ -26,4 +26,8 @@
     <string name="B">B</string>
     <string name="N">N</string>
     <string name="M">M</string>
+    <string name="NEWGAME">New Game</string>
+    <string name="INITTIME">00:00</string>
+    <string name="BESTTIME">Best Time:</string>
+    <string name="CURRTIME">Current Time:</string>
 </resources>
