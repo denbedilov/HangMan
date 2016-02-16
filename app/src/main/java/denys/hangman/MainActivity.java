@@ -8,6 +8,7 @@ import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -30,6 +31,7 @@ import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private static final String INITSCORE = "00:00";
     private String word;
     private ArrayList<String> words;
     private TextView wordField;
@@ -47,21 +49,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Spinner lengthSpinner;
     private DAL dal;
     private String length;
+    private TextView bestScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //initialization of activity variables
         dal = new DAL(this);
-
         lengthSpinner = (Spinner) findViewById(R.id.lengthSpinner);
-
-
+        bestScore=(TextView)findViewById(R.id.bestTimeTXT);
         wordField = (TextView) findViewById(R.id.GuessedWordField);
         gameView = (GameView)findViewById(R.id.gamePanel);
         time = (TextView) findViewById(R.id.currTime);
-
         newGame = (Button) findViewById(R.id.button27);
 
 
@@ -76,8 +77,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             getWords();
         else
             fillSpinner();
-    }
 
+        //length spinner listener to get high score
+        //TODO: add check if new fill list is needed for missing lengths
+        lengthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                ArrayList<String> lengths=dal.getLengths();
+//                if(!length.contains(((TextView) view).getText().toString()))
+//                    getWords();
+                if(position != 0)
+                {
+                    time.setText(INITSCORE);
+                    bestScore.setText(dal.getTime(Integer.valueOf((String) ((TextView) view).getText())));
+
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) { }
+        });
+    }
+    //getting new words from server to fill database
     private void getWords()
     {
         dialog.show();
@@ -114,14 +136,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-
+    //leaving only regular words without signs like:',-, etc.
     private boolean isOnlyASCII(String word) {
         for(int i=0; i<word.length(); i++)
             if((int) word.charAt(i) <97 || (int) word.charAt(i) > 122)
                 return false;
         return true;
     }
-
+    //game initialization- filling lenghts spinner, crating timer tast,initiating gameview counter for drawing, enabling keyboard
     private void gameInit()
     {
         length = lengthSpinner.getSelectedItem().toString();
@@ -136,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         enableButtons((ViewGroup) findViewById(android.R.id.content));
 
     }
-
+    //filling lengths spinner with existing lengths of words in the database
     private void fillSpinner() {
         ArrayList<String> lengths = dal.getLengths();
 
@@ -144,16 +166,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 this, android.R.layout.simple_spinner_item, lengths);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        lengthSpinner.setAdapter(null);
         lengthSpinner.setAdapter(adapter);
-    }
 
+    }
+    //getting word from the database with selected length
     private void getWord() {
         word = dal.getWord(length);
         if(word.equals(""))
             getWords();
     }
-
+    //enabling keyboard buttons
     private void enableButtons(ViewGroup v) {
         Button btn;
             for (int i = 0; i < v.getChildCount(); i++) {
@@ -166,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
     }
-
+    //initialization of the word for guessing
     private void fillGuessWord(int wordSize)
     {
         if(!isOnlyASCII(word)) {
@@ -186,6 +208,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
 
         Button btn=(Button)findViewById(v.getId());
+        //if NEW GAME buttin is pressed
         if(btn.getId() == newGame.getId()) {
             if(lengthSpinner.getSelectedItem().toString().equals("length"))
             {
@@ -194,6 +217,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             gameInit();
         }
+        //if keyboard butting is pressed-check if letter exists in the word to guess
         else {
             btn.setEnabled(false);
             check(btn);
@@ -202,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
-
+    //function that checks if current letter of a pressed button exists in the guessed word,
     public void check(Button btn)
     {
         Boolean exists=false;
@@ -223,7 +247,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
         }
-        // no letter case
+        // no  right guessed letter case
         if(!exists)
         {
             gameView.increaseI();
@@ -236,26 +260,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // TODO: delete this line
         //Toast.makeText(getBaseContext(), "" + word , Toast.LENGTH_SHORT).show();
     }
-
+    //check if you guessed the word
     private boolean isWon(String guessedWord) {
         if(guessedWord.contains("◻"))
             return false;
         return true;
     }
-
+    //gameover function to stop the watch task and give a sutable message
     private void gameOver(String msg) {
         task.cancel(true);
         inGame = false;
         time.setText(intTime);
-        if(msg.equals("You WIN")){
+        if(msg.equals("You WIN!")){
             msg += ", word guessed in " + intTime + " sec";
             if(Double.parseDouble(intTime) < Double.parseDouble(dal.getTime(Integer.valueOf(length))))
             {
                 dal.updateTime(length, intTime);
+                msg= "You WIN! New Best Score: " + intTime + " sec";
+
             }
         }
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
-        gameInit();
+       // gameInit();
     }
 
     //AsyncTask for timer
