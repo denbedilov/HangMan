@@ -1,6 +1,7 @@
 package denys.hangman;
 
 import android.app.ProgressDialog;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -50,11 +51,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private DAL dal;
     private String length;
     private TextView bestScore;
+    private MediaPlayer mPlayer;
+    private Button musicButton;
+    private boolean music = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         //initialization of activity variables
         dal = new DAL(this);
@@ -64,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         gameView = (GameView)findViewById(R.id.gamePanel);
         time = (TextView) findViewById(R.id.currTime);
         newGame = (Button) findViewById(R.id.button27);
-
+        musicButton = (Button) findViewById(R.id.music_btn);
 
         //setting up progress dialog
         dialog=new ProgressDialog(this);
@@ -83,15 +88,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         lengthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                ArrayList<String> lengths=dal.getLengths();
-//                if(!length.contains(((TextView) view).getText().toString()))
-//                    getWords();
                 if(position != 0)
                 {
                     length = lengthSpinner.getSelectedItem().toString();
                     time.setText(INITSCORE);
                     bestScore.setText(dal.getTime(Integer.valueOf((String) ((TextView) view).getText())));
-
                 }
 
             }
@@ -100,6 +101,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onNothingSelected(AdapterView<?> parent) { }
         });
     }
+    private void playMusic()
+    {
+        mPlayer = MediaPlayer.create(this, R.raw.treesong);
+        mPlayer.start();
+    }
+    @Override
+    protected void onStop()
+    {
+        super.onStop();
+        stopMusic();
+    }
+
+    private void stopMusic() {
+        if(mPlayer != null)
+            mPlayer.stop();
+    }
+
     //getting new words from server to fill database
     private void getWords()
     {
@@ -147,8 +165,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //game initialization- filling lenghts spinner, crating timer tast,initiating gameview counter for drawing, enabling keyboard
     private void gameInit()
     {
-        //length = lengthSpinner.getSelectedItem().toString();
-        fillSpinner();
         inGame = true;
         task=new Task();
         isWon = false;
@@ -156,7 +172,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         gameView.initI();
         getWord();
         fillGuessWord(word.length());
-        enableButtons((ViewGroup) findViewById(android.R.id.content));
+        enableButtons((ViewGroup) findViewById(android.R.id.content), true);
+        fillSpinner();
 
     }
     //filling lengths spinner with existing lengths of words in the database
@@ -173,21 +190,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //getting word from the database with selected length
     private void getWord() {
         word = dal.getWord(length);
-        if(word.equals(""))
-            getWords();
+        if(word.equals("")){
+            getWords();}
+        dal.deleteWord(word);
     }
     //enabling keyboard buttons
-    private void enableButtons(ViewGroup v) {
+    private void enableButtons(ViewGroup v, boolean status) {
         Button btn;
             for (int i = 0; i < v.getChildCount(); i++) {
                 View child = v.getChildAt(i);
                 if(child instanceof ViewGroup)
-                    enableButtons((ViewGroup)child);
+                    enableButtons((ViewGroup)child, status);
                 else if(child instanceof Button) {
                     btn = (Button) child;
-                    btn.setEnabled(true);
+                    btn.setEnabled(status);
                 }
             }
+        newGame.setEnabled(true);
+        musicButton.setEnabled(true);
     }
     //initialization of the word for guessing
     private void fillGuessWord(int wordSize)
@@ -217,6 +237,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return;
             }
             gameInit();
+        }
+        else if(btn.getId() == musicButton.getId())
+        {
+            if(!music)
+            {
+                musicButton.setText(R.string.StopMusic);
+                playMusic();
+                music = true;
+            }
+            else
+            {
+                musicButton.setText(R.string.PlayMusic);
+                stopMusic();
+                music = false;
+            }
         }
         //if keyboard butting is pressed-check if letter exists in the word to guess
         else {
@@ -272,17 +307,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         task.cancel(true);
         inGame = false;
         time.setText(intTime);
-        if(msg.equals("You WIN!")){
+        if(msg.equals("You WIN")){
             msg += ", word guessed in " + intTime + " sec";
             if(Double.parseDouble(intTime) < Double.parseDouble(dal.getTime(Integer.valueOf(length))))
             {
-                dal.updateTime(length, intTime);
+                dal.updateTime(length, time.getText().toString());
+                bestScore.setText(time.getText());
                 msg= "You WIN! New Best Score: " + intTime + " sec";
-
             }
         }
+        enableButtons((ViewGroup) findViewById(android.R.id.content), false);
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
-       // gameInit();
+        fillSpinner();
     }
 
     //AsyncTask for timer
@@ -301,8 +337,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         @Override
         protected void onProgressUpdate(Double... values) {
-            time.setText(values[0].toString());
             intTime=values[0].toString();
+            time.setText(values[0].toString());
         }
 
         @Override

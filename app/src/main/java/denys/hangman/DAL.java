@@ -99,15 +99,14 @@ public class DAL {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String[] args = {length};
         Cursor cursor = db.rawQuery("SELECT " + GameContract.WordsContract.WORD + " FROM " + GameContract.WordsContract.TABLE_NAME + " WHERE " + GameContract.WordsContract.LENGTH + "=?", args);
-        if(cursor == null)
-            return "";
         cursor.moveToFirst();
+        if(cursor.isNull(0))
+            return "";
         String w = cursor.getString(0);
-        deleteWord(w);
         return w;
     }
 
-    private void deleteWord(String word) {
+    public void deleteWord(String word) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         String[] args = {word};
         db.delete(GameContract.WordsContract.TABLE_NAME, GameContract.WordsContract.WORD+"=?", args);

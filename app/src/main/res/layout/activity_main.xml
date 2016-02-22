@@ -49,13 +49,6 @@
                 android:gravity="center_horizontal"
                 android:background="#670491">
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/NEWGAME"
-                    android:id="@+id/button27"
-                    android:onClick="onClick" />
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -99,10 +92,24 @@
                     android:paddingBottom="10dp"
                     android:textSize="15dp" />
 
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/PlayMusic"
+                    android:id="@+id/music_btn"
+                    android:onClick="onClick" />
+
                 <Spinner
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/lengthSpinner" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/NEWGAME"
+                    android:id="@+id/button27"
+                    android:onClick="onClick" />
             </LinearLayout>
         </LinearLayout>
 

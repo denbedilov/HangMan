@@ -30,4 +30,6 @@
     <string name="INITTIME">00:00</string>
     <string name="BESTTIME">Best Time:</string>
     <string name="CURRTIME">Current Time:</string>
+    <string name="PlayMusic">Play music</string>
+    <string name="StopMusic">Stop music</string>
 </resources>
