@@ -17,7 +17,7 @@ public class DAL {
     public DAL(Context context){
         dbHelper = new DBHelper(context);
     }
-
+    //returns an arraylist of the lengths of the words in the database
     public ArrayList<String> getLengths()
     {
         ArrayList<String> lengths = new ArrayList<>();
@@ -41,7 +41,7 @@ public class DAL {
         lengths.add(0,"length");
         return lengths;
     }
-
+    //adds a new word from the server to the database
     public void addWord(String word)
     {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -53,7 +53,7 @@ public class DAL {
 
         db.close();
     }
-
+    //returns the best time score of guessing for current length
     public String getTime(int length)
     {
         // get db
@@ -71,7 +71,7 @@ public class DAL {
         return w;
        // return cursor.getString(lengthIndex);
     }
-
+    //updates the best time score of guessing for current length
     public void updateTime(String length, String time)
     {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -84,7 +84,7 @@ public class DAL {
         db.update(GameContract.ScoresContract.TABLE_NAME,values,where,whereArgs);
         db.close();
     }
-
+    //returns the number of words on the database
     public int getWordsCount()
     {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -93,7 +93,7 @@ public class DAL {
         cursor.moveToFirst();
         return cursor.getInt(0);
     }
-
+    //returns a word with current length
     public String getWord(String length)
     {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -105,7 +105,7 @@ public class DAL {
         String w = cursor.getString(0);
         return w;
     }
-
+    //deletes current word from data base
     public void deleteWord(String word) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         String[] args = {word};

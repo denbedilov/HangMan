@@ -1,5 +1,6 @@
 package denys.hangman;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
@@ -30,7 +31,7 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends Activity implements View.OnClickListener {
 
     private static final String INITSCORE = "00:00";
     private String word;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private MediaPlayer mPlayer;
     private Button musicButton;
     private boolean music = false;
+    private Button oB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         time = (TextView) findViewById(R.id.currTime);
         newGame = (Button) findViewById(R.id.button27);
         musicButton = (Button) findViewById(R.id.music_btn);
+        oB = (Button) findViewById(R.id.button9);
 
         //setting up progress dialog
         dialog=new ProgressDialog(this);
@@ -84,7 +87,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             fillSpinner();
 
         //length spinner listener to get high score
-        //TODO: add check if new fill list is needed for missing lengths
         lengthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -105,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     {
         mPlayer = MediaPlayer.create(this, R.raw.treesong);
         mPlayer.start();
+        mPlayer.setLooping(true);
     }
     @Override
     protected void onStop()
@@ -229,7 +232,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
 
         Button btn=(Button)findViewById(v.getId());
-        //if NEW GAME buttin is pressed
+        //if NEW GAME button is pressed
         if(btn.getId() == newGame.getId()) {
             if(lengthSpinner.getSelectedItem().toString().equals("length"))
             {

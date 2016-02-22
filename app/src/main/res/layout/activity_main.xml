@@ -126,19 +126,22 @@
                 android:layout_weight="3"
                 android:id="@+id/GuessedWordPanel"
                 android:gravity="center_vertical|center_horizontal"
-                android:background="#670491">
+                android:background="#670491"
+                android:layout_gravity="center">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:id="@+id/GuessedWordField"
                     android:singleLine="true"
-                    android:textSize="@dimen/abc_guessed_word_size"
                     android:text="HANGMAN"
                     android:textColor="#ffffff"
                     android:background="#670491"
                     android:textStyle="bold"
-                    android:typeface="monospace" />
+                    android:typeface="monospace"
+                    android:layout_gravity="center"
+                    android:gravity="center|fill_vertical"
+                    android:textSize="30sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -245,7 +248,6 @@
                         android:id="@+id/button9"
                         android:layout_weight="1"
                         android:onClick="onClick"
-                        android:clickable="false"
                         android:enabled="false"
                         android:typeface="monospace" />
 

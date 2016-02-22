@@ -3,4 +3,5 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="abc_guessed_word_size">50sp</dimen>
+    <dimen name="guessed_word_size">14sp</dimen>
 </resources>
